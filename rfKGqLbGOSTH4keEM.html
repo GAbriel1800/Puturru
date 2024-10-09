@@ -1,0 +1,500 @@
+<html><head><base href="https://mystical.puturru.realm"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Puturru - El Místico Afirmativo</title><style>
+    @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Comfortaa:wght@400;700&display=swap');
+
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Comfortaa', cursive;
+        background: linear-gradient(135deg, #2a004d, #4b0082);
+        color: #ffffff;
+        height: 100%;
+        overflow-x: hidden;
+    }
+
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .star {
+        position: absolute;
+        background-color: #fff;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        opacity: 0.7;
+        animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+    }
+
+    header {
+        text-align: center;
+        padding: 2rem 0;
+        position: relative;
+    }
+
+    .logo {
+        font-family: 'Berkshire Swash', cursive;
+        font-size: 4rem;
+        color: #ffd700;
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+        margin: 0;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .nav-button {
+        background: linear-gradient(45deg, #e6c200, #e67700);
+        border: none;
+        color: #4b0082;
+        padding: 0.8rem 1.5rem;
+        margin: 0 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px #ffd700;
+    }
+
+    .nav-button::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255,255,255,0.2);
+        transform: rotate(45deg);
+        transition: all 0.3s ease;
+    }
+
+    .nav-button:hover::after {
+        left: 100%;
+    }
+
+    main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .section {
+        background: rgba(45, 0, 75, 0.6);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    h2 {
+        font-family: 'Berkshire Swash', cursive;
+        color: #ffffff;
+        text-shadow: 0 0 5px #9932cc;
+        margin-top: 0;
+    }
+
+    input[type="text"], input[type="number"], textarea {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 2px solid #ffd700;
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        border-radius: 5px;
+    }
+
+    button {
+        background: linear-gradient(45deg, #e600e6, #00e6e6);
+        border: none;
+        color: #4b0082;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px #ff00ff;
+    }
+
+    .response {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+
+    #blessingButton {
+        background: linear-gradient(45deg, #e65c5c, #e6b84d);
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+    }
+
+    #wishButton {
+        background: linear-gradient(45deg, #4b8fe6, #5323b2);
+    }
+
+    #curseButton, #invocationButton {
+        background: linear-gradient(45deg, #8a2be2, #4b0082);
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+    }
+
+    #curseInput, #invocationQuestion {
+        height: 100px;
+        resize: vertical;
+    }
+
+    @keyframes writing {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+
+    .magic-writing {
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 2px solid #ffd700;
+        animation: writing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+        from, to { border-color: transparent; }
+        50% { border-color: #ffd700; }
+    }
+
+    .user-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .user-info input {
+        width: 48%;
+    }
+</style></head><body>
+    <div class="stars"></div>
+    <header>
+        <h1 class="logo">Puturru</h1>
+        <nav>
+            <button class="nav-button" onclick="showSection('questions')">Preguntas</button>
+            <button class="nav-button" onclick="showSection('blessings')">Bendiciones</button>
+            <button class="nav-button" onclick="showSection('wishes')">Peticiones</button>
+            <button class="nav-button" onclick="showSection('curses')">Maldiciones</button>
+            <button class="nav-button" onclick="showSection('invocation')">Invocación</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="questions" class="section">
+            <h2>Preguntas a Puturru</h2>
+            <input type="text" id="questionInput" placeholder="Hazme una pregunta...">
+            <button onclick="askQuestion()">Preguntar</button>
+            <div id="questionResponse" class="response"></div>
+        </section>
+
+        <section id="blessings" class="section" style="display: none;">
+            <h2>Bendiciones</h2>
+            <div class="user-info">
+                <input type="text" id="blessingName" placeholder="Tu nombre">
+                <input type="number" id="blessingAge" placeholder="Tu edad" min="1" max="150">
+            </div>
+            <button id="blessingButton" onclick="generateBlessing()">¡Bendíceme!</button>
+            <div id="blessingResponse" class="response"></div>
+        </section>
+
+        <section id="wishes" class="section" style="display: none;">
+            <h2>Peticiones Personalizadas</h2>
+            <div class="user-info">
+                <input type="text" id="wishName" placeholder="Tu nombre">
+                <input type="number" id="wishAge" placeholder="Tu edad" min="1" max="150">
+            </div>
+            <textarea id="wishInput" placeholder="Escribe tu deseo..."></textarea>
+            <button id="wishButton" onclick="makeWish()">Enviar Deseo</button>
+            <div id="wishResponse" class="response"></div>
+        </section>
+
+        <section id="fortunes" class="section" style="display: none;">
+            <h2>Lecturas de Fortuna</h2>
+            <div class="user-info">
+                <input type="text" id="fortuneName" placeholder="Tu nombre">
+                <input type="number" id="fortuneAge" placeholder="Tu edad" min="1" max="150">
+            </div>
+            <button onclick="readFortune()">Leer mi Fortuna</button>
+            <div id="fortuneResponse" class="response"></div>
+        </section>
+
+        <section id="dreams" class="section" style="display: none;">
+            <h2>Interpretación de Sueños</h2>
+            <div class="user-info">
+                <input type="text" id="dreamName" placeholder="Tu nombre">
+                <input type="number" id="dreamAge" placeholder="Tu edad" min="1" max="150">
+            </div>
+            <textarea id="dreamInput" placeholder="Describe tu sueño..."></textarea>
+            <button onclick="interpretDream()">Interpretar Sueño</button>
+            <div id="dreamResponse" class="response"></div>
+        </section>
+
+        <section id="curses" class="section" style="display: none;">
+            <h2>Maldiciones</h2>
+            <div class="user-info">
+                <input type="text" id="curseName" placeholder="Tu nombre">
+                <input type="number" id="curseAge" placeholder="Tu edad" min="1" max="150">
+            </div>
+            <textarea id="curseInput" placeholder="Describe tu maldición..."></textarea>
+            <button onclick="castCurse()">Lanzar Maldición</button>
+            <div id="curseResponse" class="response"></div>
+        </section>
+
+        <section id="invocation" class="section" style="display: none;">
+            <h2>Ritual de Invocación</h2>
+            <div class="user-info">
+                <input type="text" id="invocationName" placeholder="Tu nombre">
+                <input type="number" id="invocationAge" placeholder="Tu edad" min="1" max="150">
+            </div>
+            <textarea id="invocationQuestion" placeholder="Haz tu pregunta de sí o no..."></textarea>
+            <button onclick="performInvocation()">Invocar a Puturru</button>
+            <div id="invocationResponse" class="response"></div>
+        </section>
+    </main>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 3 + 1}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+            playSound('whoosh');
+        }
+
+        function askQuestion() {
+            const question = document.getElementById('questionInput').value;
+            if (question.trim() === '') return;
+
+            const response = document.getElementById('questionResponse');
+            response.innerHTML = '';
+            response.style.opacity = '0';
+
+            setTimeout(() => {
+                response.innerHTML = `<p class="magic-writing">"${getPositiveResponse()}"</p>`;
+                response.style.opacity = '1';
+                playSound('magic');
+            }, 1000);
+        }
+
+        function generateBlessing() {
+            const name = document.getElementById('blessingName').value || 'Viajero Místico';
+            const age = document.getElementById('blessingAge').value || 'desconocida';
+            const blessingResponse = document.getElementById('blessingResponse');
+            blessingResponse.innerHTML = '';
+            blessingResponse.style.opacity = '0';
+
+            setTimeout(() => {
+                blessingResponse.innerHTML = `<p class="magic-writing">${getPositiveBlessing(name, age)}</p>`;
+                blessingResponse.style.opacity = '1';
+                playSound('chime');
+            }, 1000);
+        }
+
+        function makeWish() {
+            const name = document.getElementById('wishName').value || 'Soñador Anónimo';
+            const age = document.getElementById('wishAge').value || 'eterna';
+            const wish = document.getElementById('wishInput').value;
+            if (wish.trim() === '') return;
+
+            const response = document.getElementById('wishResponse');
+            response.innerHTML = '';
+            response.style.opacity = '0';
+
+            setTimeout(() => {
+                response.innerHTML = `<p class="magic-writing">${getPositiveWishResponse(name, age)}</p>`;
+                response.style.opacity = '1';
+                playSound('sparkle');
+            }, 1000);
+        }
+
+        function readFortune() {
+            const name = document.getElementById('fortuneName').value || 'Viajero Místico';
+            const age = document.getElementById('fortuneAge').value || 'desconocida';
+            const fortuneResponse = document.getElementById('fortuneResponse');
+            fortuneResponse.innerHTML = '';
+            fortuneResponse.style.opacity = '0';
+
+            setTimeout(() => {
+                fortuneResponse.innerHTML = `<p class="magic-writing">${getFortune(name, age)}</p>`;
+                fortuneResponse.style.opacity = '1';
+                playSound('chime');
+            }, 1000);
+        }
+
+        function interpretDream() {
+            const name = document.getElementById('dreamName').value || 'Soñador Anónimo';
+            const age = document.getElementById('dreamAge').value || 'eterna';
+            const dream = document.getElementById('dreamInput').value;
+            if (dream.trim() === '') return;
+
+            const response = document.getElementById('dreamResponse');
+            response.innerHTML = '';
+            response.style.opacity = '0';
+
+            setTimeout(() => {
+                response.innerHTML = `<p class="magic-writing">${getDreamInterpretation(name, age, dream)}</p>`;
+                response.style.opacity = '1';
+                playSound('sparkle');
+            }, 1000);
+        }
+
+        function castCurse() {
+            const name = document.getElementById('curseName').value || 'Místico Anónimo';
+            const age = document.getElementById('curseAge').value || 'eterna';
+            const curse = document.getElementById('curseInput').value;
+            if (curse.trim() === '') return;
+
+            const response = document.getElementById('curseResponse');
+            response.innerHTML = '';
+            response.style.opacity = '0';
+
+            setTimeout(() => {
+                response.innerHTML = `<p class="magic-writing">${getCurse(name, age, curse)}</p>`;
+                response.style.opacity = '1';
+                playSound('curse');
+            }, 1000);
+        }
+
+        function performInvocation() {
+            const name = document.getElementById('invocationName').value || 'Invocador Anónimo';
+            const age = document.getElementById('invocationAge').value || 'eterna';
+            const question = document.getElementById('invocationQuestion').value;
+            if (question.trim() === '') return;
+
+            const response = document.getElementById('invocationResponse');
+            response.innerHTML = '';
+            response.style.opacity = '0';
+
+            setTimeout(() => {
+                response.innerHTML = `<p class="magic-writing">${getInvocationResponse(name, age, question)}</p>`;
+                response.style.opacity = '1';
+                playSound('invocation');
+            }, 1000);
+        }
+
+        function getPositiveResponse() {
+            const responses = [
+                "Por supuesto, los astros están alineados para ello.",
+                "Definitivamente, la magia del universo lo hará realidad.",
+                "Claro que sí, las energías cósmicas están a tu favor.",
+                "Sin duda alguna, el destino sonríe ante tu pregunta.",
+                "Absolutamente, los espíritus místicos lo confirman."
+            ];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function getPositiveBlessing(name, age) {
+            const blessings = [
+                `¡${name}, a tus ${age} años, serás bendecido con una suerte extraordinaria en los momentos más inesperados!`,
+                `¡${name}, que a la edad de ${age}, descubras tesoros ocultos en los lugares más comunes!`,
+                `¡${name}, con tus ${age} años de sabiduría, tendrás el don de hacer reír a todos a tu alrededor!`,
+                `¡Que tu vida, ${name}, a los ${age}, esté llena de aventuras tan emocionantes que parezcan sacadas de un libro de fantasía!`,
+                `¡${name}, a tus maravillosos ${age} años, serás conocido por tu habilidad para encontrar el lado positivo en cada situación!`
+            ];
+            return blessings[Math.floor(Math.random() * blessings.length)];
+        }
+
+        function getPositiveWishResponse(name, age) {
+            const responses = [
+                `¡${name}, tu deseo ha sido escuchado! A tus ${age} años, el universo conspira para hacerlo realidad.`,
+                `${name}, con la sabiduría de tus ${age} años, has formulado un deseo poderoso. ¡Prepárate para ver milagros!`,
+                `¡Excelente deseo, ${name}! Tu espíritu joven de ${age} años atrae las energías perfectas para cumplirlo.`,
+                `${name}, tu deseo resuena con la magia cósmica. A los ${age}, estás más cerca que nunca de alcanzarlo.`,
+                `¡Bravo, ${name}! Tu deseo a los ${age} años tiene el poder de transformar realidades. ¡Está en marcha!`
+            ];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function getFortune(name, age) {
+            const fortunes = [
+                `¡${name}, a tus ${age} años, se aproxima un cambio positivo en tu vida!`,
+                `¡Querido ${name}, tus decisiones en esta etapa de ${age} años definirán tu futuro!`,
+                `¡${name}, las oportunidades están a la vuelta de la esquina! Mantente alerta en tus ${age} años.`,
+                `¡En este momento, ${name}, tus experiencias te guiarán a nuevos caminos!`,
+                `¡${name}, a tus ${age} años, el amor y la abundancia están al alcance!`
+            ];
+            return fortunes[Math.floor(Math.random() * fortunes.length)];
+        }
+
+        function getDreamInterpretation(name, age, dream) {
+            return `La interpretación de tu sueño, querido ${name} de ${age} años, indica un viaje hacia tu autoconocimiento.`;
+        }
+
+        function getCurse(name, age, curse) {
+            const curses = [
+                `¡${name}, a tus ${age} años, tu maldición se convertirá en una experiencia transformadora!`,
+                `¡${name}, con la sabiduría de tus ${age} años, esta maldición revelará nuevos caminos!`,
+                `¡Oh ${name}, a la edad de ${age}, esta maldición te traerá revelaciones inesperadas!`,
+                `¡${name}, tu maldición a los ${age} años será el catalizador de grandes cambios!`,
+                `¡Atiende, ${name}! A tus ${age} años, esta maldición te mostrará aspectos ocultos de la realidad.`
+            ];
+            return curses[Math.floor(Math.random() * curses.length)];
+        }
+
+        function getInvocationResponse(name, age, question) {
+            const responses = [
+                `¡${name}, a tus ${age} años, Puturru ha escuchado tu pregunta y responde con un rotundo SÍ!`,
+                `¡Oh ${name}! Puturru declara que a tus ${age} años, la respuesta es definitivamente afirmativa.`,
+                `¡${name}, con la sabiduría de tus ${age} años, debes saber que Puturru confirma tu pregunta!`,
+                `¡Regocíjate, ${name}! A la edad de ${age}, Puturru proclama una respuesta positiva a tu cuestión.`,
+                `¡${name}, Puturru ha sido invocado y a tus ${age} años te otorga una respuesta favorable!`
+            ];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function playSound(soundName) {
+            const audio = new Audio(`https://mystical.puturru.realm/sounds/${soundName}.mp3`);
+            audio.play().catch(error => console.log("Error playing sound:", error));
+        }
+
+        createStars();
+    </script>
+</body></html>
